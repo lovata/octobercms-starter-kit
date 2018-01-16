@@ -1,5 +1,7 @@
 Vagrant.configure("2") do |config|
     config.vm.box = "ubuntu/xenial64"
+    config.vm.provision :shell, inline: "> /etc/profile.d/myvars.sh", run: "always"
+    config.vm.provision :shell, inline: "echo \"export VAGRANT=true\" >> /etc/profile.d/myvars.sh", run: "always"
     config.vm.provision :shell, path: "bash/environment/install.sh"
     config.vm.provider "virtualbox" do |vb|
         vb.memory = "2048"
