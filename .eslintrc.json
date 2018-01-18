@@ -1,6 +1,7 @@
 {
     "extends": "standard",
     "env": {
-    	"jquery": true
+    	"jquery": true,
+    	"browser": true
     }
 }
