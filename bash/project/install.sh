@@ -23,15 +23,36 @@ do
     fi
 done
 
-GIT_DIRECTORY=/vagrant/.git
-echo $GIT_DIRECTORY
-if [ -d "$GIT_DIRECTORY" ]; then
-    echo "Delete Starter Kit Git directory…"
-    rm -rf ./.git
+# Checking the validity of all checks
+if $CHECK_PASSED; then
+    sleep 0.5
+    echo
+    read -p "Do you want to continue? [Y/n]" -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+
+        GIT_DIRECTORY=/vagrant/.git
+        echo $GIT_DIRECTORY
+        if [ -d "$GIT_DIRECTORY" ]; then
+            echo "Delete Starter Kit Git directory…"
+            rm -rf ./.git
+        fi
+
+        echo "Backuping README file of Starter kit…"
+        mv ./README.md ./README.STARTERKIT.md
+
+        bash $CFG_PATH/october.sh $CFG_PATH
+        bash $CFG_PATH/webpack.sh $CFG_PATH
+
+    elif [[ $REPLY =~ ^[n]$ ]]; then
+        echo
+        echo -e "\e[38;5;208m\e[7m          Installation canceled by user!          \e[0m"
+        echo
+    fi
+else
+    sleep 0.5
+    echo
+    echo -e "\e[31m\e[7m          Installation canceled by script!           \e[0m"
+    echo -e "\e[31m\e[7m           Please, fix the errors above!             \e[0m"
+    echo
 fi
-
-echo "Backuping README file of Starter kit…"
-mv ./README.md ./README.STARTERKIT.md
-
-bash $CFG_PATH/october.sh $CFG_PATH
-bash $CFG_PATH/webpack.sh $CFG_PATH
