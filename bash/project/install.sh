@@ -32,21 +32,7 @@ if $CHECK_PASSED; then
     if [[ $REPLY =~ ^[Yy]$ ]]; then
 
         # Deleting October CMS Starter Kit Git files
-        sleep 0.5
-        echo
-        echo -e "\e[7m       DELETE STARTER KIT GIT FILES (STEP 2/7)       \e[0m"
-        echo
-
-        GIT_DIRECTORY=./.git
-        sleep 0.5
-        if [ -d "$GIT_DIRECTORY" ]; then
-            rm -rf ./.git
-            echo -e "\e[32m✓ OK!\e[0m"
-        else
-            echo
-            echo -e "\e[34m🛈  Nothing to delete!\e[0m"
-            echo
-        fi
+        bash $CFG_PATH/delete-git.sh $CFG_PATH
 
         # Backup Starter Kit README file
         sleep 0.5
