@@ -2,32 +2,111 @@
 
 source $1/config.cfg
 
-if [ "$OCTOBER_GIT_INSTALL" ]
-then
-    echo "Installing October via Git…"
-    git clone git@github.com:octobercms/october.git october
+sleep 0.5
 
-    sudo rm -r october/.git
+# Move October CMS source code from temporary directory and delete it
+function moveSourceAndRemoveDir {
     shopt -s dotglob
-    mv october/* ./
+    cp -r october/* ./
+    rm -rf october/*
     shopt -u dotglob
     rmdir october
 
-    echo "Installing October dependencies…"
-    composer install
+    if [ $? -eq 0 ]
+    then
+        echo
+        echo -e "\e[32m✓ Source code temporary directory has been found and deleted!\e[0m"
+        echo
+    else
+        echo
+        echo -e "\e[34m🛈  No existing source code directory has been found. There's nothing to delete.\e[0m"
+        echo
+    fi
+}
 
-    sudo rm -r modules/backend/.git
-    sudo rm -r modules/cms/.git
-    sudo rm -r modules/system/.git
-else
-    echo "Installing October via Composer…"
+if [[ "$OCTOBER_GIT_INSTALL" = false ]]; then
+    # Install source code with Composer and inform user
+    echo
+    echo -e "\e[7m       INSTALL OCTOBER CMS WITH COMPOSER (STEP 4/7)       \e[0m"
+    echo
     composer create-project october/october october
 
-    shopt -s dotglob
-    mv october/* ./
-    shopt -u dotglob
-    rmdir october
+    if [ $? -eq 0 ]
+    then
+        echo
+        echo -e "\e[32m✓ Composer package has been installed!\e[0m"
+        echo
+    else
+        echo
+        echo -e "\e[31m❌ \e[3mCan't install Composer package!\e[0m"
+        echo
+    fi
+
+    # Move October CMS source code from temporary directory and delete it
+    moveSourceAndRemoveDir
+else
+    echo
+    echo -e "\e[7m       INSTALL OCTOBER CMS FROM GIT (STEP 4/7)       \e[0m"
+    echo
+
+    TEMP_DIR=./october
+
+    # Delete temporary directory if existing
+    if [ -d "$TEMP_DIR" ]; then
+        rm -r $TEMP_DIR
+        echo -e "\e[32m✓ Existing temporary directory has been found and deleted!\e[0m"
+    else
+        echo
+        echo -e "\e[34m🛈  No existing temporary directory has been found. There's nothing to delete.\e[0m"
+        echo
+    fi
+
+    # Clone source code from Git repository and inform user
+    git clone git@github.com:octobercms/october.git october
+
+    if [ $? -eq 0 ]
+    then
+        echo
+        echo -e "\e[32m✓ Source code has been cloned from repository!\e[0m"
+        echo
+    else
+        echo
+        echo -e "\e[31m❌ \e[3mCan't clone source code from Git!\e[0m"
+        echo
+    fi
+
+    # Delete from source code .git directory if existing
+    SOURCE_CODE_GIT_DIR=october/.git
+    sleep 0.5
+    if [ -d "$SOURCE_CODE_GIT_DIR" ]; then
+        sudo rm -r $SOURCE_CODE_GIT_DIR
+        echo
+        echo -e "\e[32m✓ Source code .git directory has been found and deleted!\e[0m"
+        echo
+    else
+        echo
+        echo -e "\e[34m🛈  No existing source code .git directory has been found. There's nothing to delete.\e[0m"
+        echo
+    fi
+
+    # Move October CMS source code from temporary directory and delete it
+    moveSourceAndRemoveDir
+
+    # Install Composer dependencies
+    composer install
+
+    if [ $? -eq 0 ]
+    then
+        echo
+        echo -e "\e[32m✓ Composer dependencies have been installed!\e[0m"
+        echo
+    else
+        echo
+        echo -e "\e[31m❌ \e[3mCan't install Composer dependencies!\e[0m"
+        echo
+    fi
 fi
+
 sed -i "1i APP_ASSETS=dev" .env
 
 echo "Setting up the database…"
