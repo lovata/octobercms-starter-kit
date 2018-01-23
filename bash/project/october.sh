@@ -107,7 +107,40 @@ else
     fi
 fi
 
-sed -i "1i APP_ASSETS=dev" .env
+# Setup October CMS environment
+sleep 0.5
+ENV_FILE=.env
+sleep 0.5
+if [ -e $ENV_FILE ]; then
+    sed -i "1i APP_ASSETS=dev" $ENV_FILE
+    if [ $? -eq 0 ]
+    then
+        echo
+        echo -e "\e[32m✓ .env file has been found and APP_ASSETS variable was added with 'dev' value!\e[0m"
+        echo
+    else
+        echo
+        echo -e "\e[31m❌ \e[3m.env file hasn't been found or APP_ASSETS variable wasn't added with 'dev' value!\e[0m"
+        echo
+    fi
+else
+    echo "echo else"
+    php artisan october:env
+    APP_KEY='APP_KEY=CHANGE_ME!!!!!!!!!!!!!!!!!!!!!!!'
+    APP_KEY_RANDOM=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+    APP_KEY_CHANGE='s/'$APP_KEY'/APP_KEY='$APP_KEY_RANDOM'/'
+    sed -i $APP_KEY_CHANGE $ENV_FILE
+    if [ $? -eq 0 ]
+    then
+        echo
+        echo -e "\e[32m✓ .env file hasn't been found and was created. APP_ASSETS variable was added with 'dev' value!\e[0m"
+        echo
+    else
+        echo
+        echo -e "\e[31m❌ \e[3m.env file hasn't been found and wasn't created or APP_ASSETS variable wasn't added with \'dev\' value!\e[0m"
+        echo
+    fi
+fi
 
 echo "Setting up the database…"
 
