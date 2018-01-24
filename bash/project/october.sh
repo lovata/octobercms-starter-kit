@@ -107,37 +107,71 @@ else
     fi
 fi
 
-# Setup October CMS environment
+# Setup October CMS local environment
 sleep 0.5
 ENV_FILE=.env
-sleep 0.5
-if [ -e $ENV_FILE ]; then
+ENV_SED_RESULT=true
+
+function envSetup {
     sed -i "1i APP_ASSETS=dev" $ENV_FILE
-    if [ $? -eq 0 ]
-    then
+    if [[ $? -ne 0 ]]; then
+        ENV_SED_RESULT=false
+    fi
+
+    ENV_DATABASE="DB_DATABASE=database"
+    ENV_DATABASE_SET="DB_DATABASE=$DB_NAME"
+    sed -i "s/$ENV_DATABASE/$ENV_DATABASE_SET/" $ENV_FILE
+    if [[ $? -ne 0 ]]; then
+        ENV_SED_RESULT=false
+    fi
+
+    ENV_PASSWORD="DB_PASSWORD="
+    ENV_PASSWORD_SET="DB_PASSWORD=$DB_PASSWORD"
+    sed -i "s/$ENV_PASSWORD/$ENV_PASSWORD_SET/" $ENV_FILE
+    if [[ $? -ne 0 ]]; then
+        ENV_SED_RESULT=false
+    fi
+}
+
+if [ -e $ENV_FILE ]; then
+    envSetup
+
+    if [[ "$ENV_SED_RESULT" = true ]]; then
         echo
-        echo -e "\e[32m✓ .env file has been found and APP_ASSETS variable was added with 'dev' value!\e[0m"
+        echo -e "\e[32m✓ .env file has been found and was configured!\e[0m"
         echo
     else
         echo
-        echo -e "\e[31m❌ \e[3m.env file hasn't been found or APP_ASSETS variable wasn't added with 'dev' value!\e[0m"
+        echo -e "\e[31m❌ \e[3m.env file has been found but wasn't configured!\e[0m"
         echo
     fi
 else
-    echo "echo else"
-    php artisan october:env
-    APP_KEY='APP_KEY=CHANGE_ME!!!!!!!!!!!!!!!!!!!!!!!'
-    APP_KEY_RANDOM=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
-    APP_KEY_CHANGE='s/'$APP_KEY'/APP_KEY='$APP_KEY_RANDOM'/'
-    sed -i $APP_KEY_CHANGE $ENV_FILE
-    if [ $? -eq 0 ]
-    then
+    function envCreateSetup {
+        php artisan october:envs
+        if [[ $? -ne 0 ]]; then
+            ENV_SED_RESULT=false
+        fi
+
+        APP_KEY='APP_KEY=CHANGE_ME!!!!!!!!!!!!!!!!!!!!!!!'
+        APP_KEY_RANDOM=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+        APP_KEY_CHANGE='s/'$APP_KEY'/APP_KEY='$APP_KEY_RANDOM'/'
+        sed -i $APP_KEY_CHANGE .env
+        if [[ $? -ne 0 ]]; then
+            ENV_SED_RESULT=false
+        fi
+
+        envSetup
+    }
+
+    envCreateSetup
+
+    if [[ "$ENV_SED_RESULT" = true ]]; then
         echo
-        echo -e "\e[32m✓ .env file hasn't been found and was created. APP_ASSETS variable was added with 'dev' value!\e[0m"
+        echo -e "\e[32m✓ .env file hasn't been found, was created and configured.\e[0m"
         echo
     else
         echo
-        echo -e "\e[31m❌ \e[3m.env file hasn't been found and wasn't created or APP_ASSETS variable wasn't added with 'dev' value!\e[0m"
+        echo -e "\e[31m❌ \e[3m.env file hasn't been found and wasn't created or configured!\e[0m"
         echo
     fi
 fi
@@ -145,14 +179,6 @@ fi
 echo "Setting up the database…"
 
 sudo mysql -p$DB_PASSWORD -u$DB_USER -e "DROP DATABASE IF EXISTS \`$DB_NAME\`; CREATE DATABASE \`$DB_NAME\` CHARACTER SET $DB_CHARACTER_SET COLLATE $DB_COLLATION;"
-
-ENV_DATABASE="DB_DATABASE=database"
-ENV_DATABASE_SET="DB_DATABASE=$DB_NAME"
-sed -i "s/$ENV_DATABASE/$ENV_DATABASE_SET/" .env
-
-ENV_PASSWORD="DB_PASSWORD="
-ENV_PASSWORD_SET="DB_PASSWORD=$DB_PASSWORD"
-sed -i "s/$ENV_PASSWORD/$ENV_PASSWORD_SET/" .env
 
 echo "Installing October…"
 php artisan october:up
