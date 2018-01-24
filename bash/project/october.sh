@@ -137,7 +137,7 @@ else
         echo
     else
         echo
-        echo -e "\e[31m❌ \e[3m.env file hasn't been found and wasn't created or APP_ASSETS variable wasn't added with \'dev\' value!\e[0m"
+        echo -e "\e[31m❌ \e[3m.env file hasn't been found and wasn't created or APP_ASSETS variable wasn't added with 'dev' value!\e[0m"
         echo
     fi
 fi
