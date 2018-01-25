@@ -176,9 +176,18 @@ else
     fi
 fi
 
-echo "Setting up the database…"
-
+# Create new database and drop old if exist
 sudo mysql -p$DB_PASSWORD -u$DB_USER -e "DROP DATABASE IF EXISTS \`$DB_NAME\`; CREATE DATABASE \`$DB_NAME\` CHARACTER SET $DB_CHARACTER_SET COLLATE $DB_COLLATION;"
+
+if [[ $? -eq 0 ]]; then
+    echo
+    echo -e "\e[32m✓ New database has been created (old was dropped if existed)!\e[0m"
+    echo
+else
+    echo
+    echo -e "\e[31m❌ Can't create new database.\e[0m"
+    echo
+fi
 
 echo "Installing October…"
 php artisan october:up
