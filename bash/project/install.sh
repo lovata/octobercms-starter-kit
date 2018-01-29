@@ -18,9 +18,9 @@ echo -e "In case of errors or mistakes in project settings fix them in \e[3m./ba
 for VARIABLE in PROJECT_NAME PROJECTS_DIR VIRTUALHOST_NAME DB_NAME DB_USER DB_PASSWORD DB_CHARACTER_SET DB_COLLATION OC_GIT_INSTALL THEME_DRAFT_INSTALL
 do
     if [ -n "${!VARIABLE}" ]; then
-        echo -e "\e[32m✓ \e[3m$VARIABLE is defined as \e[39m\e[3m${!VARIABLE}\e[0m"
+        echo -e "\e[32m✓ \e[3m$VARIABLE\e[0m is defined as \e[39m\e[3m${!VARIABLE}\e[0m"
     else
-        echo -e "\e[31m❌ \e[3m$VARIABLE is not defined!\e[0m"
+        echo -e "\e[31m❌ \e[3m$VARIABLE\e[0m is not defined!\e[0m"
         CHECK_PASSED=false
     fi
 done
