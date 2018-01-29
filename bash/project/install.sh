@@ -14,6 +14,7 @@ CHECK_PASSED=true
 
 # Check config variables for initialization
 sleep 0.5
+echo -e "In case of errors or mistakes in project settings fix them in \e[3m./bash/project/config.cfg\e[0m.\n"
 for VARIABLE in PROJECT_NAME PROJECTS_DIR VIRTUALHOST_NAME DB_NAME DB_USER DB_PASSWORD DB_CHARACTER_SET DB_COLLATION OC_GIT_INSTALL THEME_DRAFT_INSTALL
 do
     if [ -n "${!VARIABLE}" ]; then
