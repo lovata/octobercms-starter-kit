@@ -33,11 +33,8 @@ if $CHECK_PASSED; then
     # Confirm the start of the install
     if [[ $REPLY =~ ^[Yy]$ ]]; then
 
-        # Delete October CMS Starter Kit Git files
-        bash $CFG_PATH/delete-git.sh $CFG_PATH
-
-        # Backup Starter Kit README file
-        bash $CFG_PATH/readme-backup.sh $CFG_PATH
+        # Pepare project directory for install
+        bash $CFG_PATH/dir-prepare.sh $CFG_PATH
 
         # Install October CMS
         bash $CFG_PATH/october.sh $CFG_PATH
