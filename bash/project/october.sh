@@ -201,11 +201,73 @@ else
     echo
 fi
 
-echo "Installing project theme…"
-mv $1/temp/THEME_NAME ./themes/$PROJECT_NAME
-rm -R $1/temp/
+# Installing project theme
 
-sed -i "s/THEME_NAME/$PROJECT_NAME/g" ./themes/$PROJECT_NAME/layouts/main.htm ./themes/$PROJECT_NAME/theme.yaml
+if [[ "$THEME_DRAFT_INSTALL" = true ]]; then
 
-php artisan theme:use $PROJECT_NAME
-php artisan october:fresh
+    THEMES_DIR=./themes
+    THEME_DIR=./$THEMES_DIR/$PROJECT_NAME
+    THEME_DIR_TEMP=./$THEMES_DIR/THEME_NAME/
+    THEME_GIT_DIR=./$THEMES_DIR/.git
+
+    sleep 0.5
+
+    if [ -d "$THEME_DIR_TEMP" ]; then
+        shopt -s dotglob
+        rm -rf $THEME_DIR_TEMP
+        shopt -u dotglob
+        echo
+        echo -e "\e[32m✓ Existed project theme was deleted!\e[0m"
+        echo
+    elif [ -d "$THEME_DIR" ]; then
+        shopt -s dotglob
+        rm -rf $THEME_DIR
+        shopt -u dotglob
+        echo
+        echo -e "\e[32m⚠ Existed project theme was deleted!\e[0m"
+        echo
+    else
+        echo
+        echo -e "\e[34m🛈  Nothing to delete!\e[0m"
+        echo
+    fi
+
+    sleep 0.5
+    php artisan october:fresh
+
+    git clone $THEME_GIT_PATH $THEMES_DIR
+
+    if [[ $? -eq 0 ]]; then
+        shopt -s dotglob
+        rm -rf $THEME_GIT_DIR
+        rm $THEMES_DIR/LICENSE
+        rm $THEMES_DIR/README.md
+        mv $THEME_DIR_TEMP $THEME_DIR
+        shopt -u dotglob
+        echo
+        echo -e "\e[32m✓ Draft theme is ready to install!\e[0m"
+        echo
+    else
+        echo
+        echo -e "\e[31m❌ Can't clone draft theme!\e[0m"
+        echo
+    fi
+
+    if [ -d "$THEME_DIR" ]; then
+        sed -i "s/THEME_NAME/$PROJECT_NAME/g" $THEME_DIR/layouts/main.htm $THEME_DIR/theme.yaml
+        if [[ $? -eq 0 ]]; then
+            php artisan theme:use $PROJECT_NAME
+            echo
+            echo -e "\e[32m✓ Draft theme is installed!\e[0m"
+            echo
+        else
+            echo
+            echo -e "\e[31m❌ Can't install draft theme!\e[0m"
+            echo
+        fi
+    else
+        echo
+        echo -e "\e[34m🛈  Nothing to delete!\e[0m"
+        echo
+    fi
+fi
