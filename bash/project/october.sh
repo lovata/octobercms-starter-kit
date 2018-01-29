@@ -147,7 +147,7 @@ if [ -e $ENV_FILE ]; then
     fi
 else
     function envCreateSetup {
-        php artisan october:envs
+        php artisan october:env
         if [[ $? -ne 0 ]]; then
             ENV_SED_RESULT=false
         fi
