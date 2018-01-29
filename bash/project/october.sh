@@ -24,7 +24,7 @@ function moveSourceAndRemoveDir {
     fi
 }
 
-if [[ "$OCTOBER_GIT_INSTALL" = false ]]; then
+if [[ "$OC_GIT_INSTALL" = false ]]; then
     # Install source code with Composer and inform user
     echo
     echo -e "\e[7m       INSTALL OCTOBER CMS WITH COMPOSER (STEP 4/7)       \e[0m"
