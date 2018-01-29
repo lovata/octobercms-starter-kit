@@ -5,9 +5,7 @@ CFG_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . $CFG_PATH/config.cfg
 
 # Check settings variables initialization
-echo
-echo -e "\e[7m          CHECK PROJECT SETTINGS (STEP 1/7)          \e[0m"
-echo
+echo -e "\n\e[7m          CHECK PROJECT SETTINGS (STEP 1/7)          \e[0m\n"
 
 # Define check status variables
 CHECK_PASSED=true
@@ -27,9 +25,7 @@ done
 # Checking the validity of all checks
 if $CHECK_PASSED; then
     sleep 0.5
-    echo
-    read -p "Do you want to continue? [Y/n]" -n 1 -r
-    echo
+    read -p $'\x0aDo you want to continue? [Y/n]\x0a' -n 1 -r
 
     # Approval of the install start
     if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -48,14 +44,9 @@ if $CHECK_PASSED; then
 
     # Declining of the install start
     elif [[ $REPLY =~ ^[n]$ ]]; then
-        echo
-        echo -e "\e[38;5;208m\e[7m          Installation canceled by user!          \e[0m"
-        echo
+        echo -e "\n\e[38;5;208m\e[7m          Installation canceled by user!          \e[0m\n"
     fi
 else
     sleep 0.5
-    echo
-    echo -e "\e[31m\e[7m          Installation canceled by script!           \e[0m"
-    echo -e "\e[31m\e[7m           Please, fix the errors above!             \e[0m"
-    echo
+    echo -e "\n\e[31m\e[7m          Installation canceled by script!           \n           Please, fix the errors above!             \e[0m\n"
 fi
