@@ -189,8 +189,17 @@ else
     echo
 fi
 
-echo "Installing October…"
+# Install October CMS
 php artisan october:up
+if [[ $? -eq 0 ]]; then
+    echo
+    echo -e "\e[32m✓ October CMS has been installed!\e[0m"
+    echo
+else
+    echo
+    echo -e "\e[31m❌ October CMS hasn't been installed!\e[0m"
+    echo
+fi
 
 echo "Installing project theme…"
 mv $1/temp/THEME_NAME ./themes/$PROJECT_NAME
