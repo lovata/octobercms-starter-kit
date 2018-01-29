@@ -4,13 +4,15 @@
 CFG_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . $CFG_PATH/config.cfg
 
-# Check settings variables initialization
+# ----------------------------------------------------------------------
+# STEP. Check settings variables initialization
+# ----------------------------------------------------------------------
 echo -e "\n\e[7m          CHECK PROJECT SETTINGS (STEP 1/7)          \e[0m\n"
 
-# Define check status variables
+# Define check status of config variables
 CHECK_PASSED=true
 
-# Check settings variables initialization
+# Check config variables for initialization
 sleep 0.5
 for VARIABLE in PROJECT_NAME PROJECTS_DIR VIRTUALHOST_NAME DB_NAME DB_USER DB_PASSWORD DB_CHARACTER_SET DB_COLLATION OC_GIT_INSTALL
 do
@@ -22,15 +24,15 @@ do
     fi
 done
 
-# Checking the validity of all checks
+# Check the validity of all checks
 if $CHECK_PASSED; then
     sleep 0.5
     read -p $'\x0aDo you want to continue? [Y/n]\x0a' -n 1 -r
 
-    # Approval of the install start
+    # Confirm the start of the install
     if [[ $REPLY =~ ^[Yy]$ ]]; then
 
-        # Deleting October CMS Starter Kit Git files
+        # Delete October CMS Starter Kit Git files
         bash $CFG_PATH/delete-git.sh $CFG_PATH
 
         # Backup Starter Kit README file
@@ -39,10 +41,10 @@ if $CHECK_PASSED; then
         # Install October CMS
         bash $CFG_PATH/october.sh $CFG_PATH
 
-        # Install build script
+        # Install frontend build script
         bash $CFG_PATH/webpack.sh $CFGSSED=true_PATH
 
-    # Declining of the install start
+    # Decline the start of the install
     elif [[ $REPLY =~ ^[n]$ ]]; then
         echo -e "\n\e[38;5;208m\e[7m          Installation canceled by user!          \e[0m\n"
     fi
