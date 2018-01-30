@@ -27,7 +27,7 @@ function moveSourceAndRemoveDir {
 if [[ "$OC_GIT_INSTALL" = false ]]; then
     # Install source code with Composer and inform user
     echo -e "\n\e[7m       INSTALL OCTOBER CMS WITH COMPOSER (STEP 3/7)       \e[0m\n"
-    composer create-project october/october october
+    composer create-project october/october:$OC_VERSION october
 
     if [ $? -eq 0 ]
     then
