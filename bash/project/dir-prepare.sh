@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 source $1/config.cfg
+source $1/functions.sh
 
 # ----------------------------------------------------------------------
 # STEP. Pepare project directory for install
@@ -14,9 +15,9 @@ GIT_DIR=./.git
 sleep 0.5
 if [ -d "$GIT_DIR" ]; then
     rm -rf ./.git
-    echo -e "\n\e[32m✓ Git directory was deleted.\e[0m\n"
+    userMessage success "Git directory was deleted."
 else
-    echo -e "\n\e[34m🛈  No Git directory to delete.\e[0m\n"
+    userMessage info "No Git directory to delete."
 fi
 
 # Prevent October CMS Starter Kit README from replacement
@@ -24,7 +25,7 @@ README_FILE="./README.md"
 sleep 0.5
 if [[ -e $README_FILE ]]; then
     mv ./README.md ./README.STARTERKIT.md
-    echo -e "\n\e[32m✓ Backup of project README.md was created.\e[0m\n"
+    userMessage success "Backup of project README.md was created."
 else
-    echo -e "\n\e[38;5;166m⚠  No project README.md was a found for backup! Don't forget to add it later!\e[0m\n"
+    userMessage warning "No project README.md was a found for backup! Don't forget to add it later!"
 fi

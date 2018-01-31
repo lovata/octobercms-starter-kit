@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 source $1/config.cfg
+source $1/functions.sh
 
 # ----------------------------------------------------------------------
 # STEP. Install October CMS
@@ -18,9 +19,9 @@ function moveSourceAndRemoveDir {
 
     if [ $? -eq 0 ]
     then
-        echo -e "\n\e[32m✓ Source code temporary directory has been found and deleted!\e[0m\n"
+        userMessage success "Source code temporary directory has been found and deleted!"
     else
-        echo -e "\n\e[34m🛈  No existing source code directory has been found. There's nothing to delete.\e[0m\n"
+        userMessage info "No existing source code directory has been found. There's nothing to delete."
     fi
 }
 
@@ -31,9 +32,9 @@ if [[ "$OC_GIT_INSTALL" = false ]]; then
 
     if [ $? -eq 0 ]
     then
-        echo -e "\n\e[32m✓ Composer package has been installed!\e[0m\n"
+        userMessage success "Composer package has been installed!"
     else
-        echo -e "\n\e[31m❌ \e[3mCan't install Composer package!\e[0m\n"
+        userMessage error "Can't install Composer package!"
     fi
 
     # Move October CMS source code from temporary directory and delete it
@@ -46,9 +47,9 @@ else
     # Delete temporary directory if existing
     if [ -d "$TEMP_DIR" ]; then
         rm -r $TEMP_DIR
-        echo -e "\n\e[32m✓ Existing temporary directory has been found and deleted!\e[0m\n"
+        userMessage success "Existing temporary directory has been found and deleted!"
     else
-        echo -e "\n\e[34m🛈  No existing temporary directory has been found. There's nothing to delete.\e[0m\n"
+        userMessage info "No existing temporary directory has been found. There's nothing to delete."
     fi
 
     # Clone source code from Git repository and inform user
@@ -56,9 +57,9 @@ else
 
     if [ $? -eq 0 ]
     then
-        echo -e "\n\e[32m✓ Source code has been cloned from repository!\e[0m\n"
+        userMessage success "Source code has been cloned from repository!"
     else
-        echo -e "\n\e[31m❌ \e[3mCan't clone source code from Git!\e[0m\n"
+        userMessage error "Can't clone source code from Git!"
     fi
 
     # Delete from source code .git directory if existing
@@ -66,9 +67,9 @@ else
     sleep 0.5
     if [ -d "$SOURCE_CODE_GIT_DIR" ]; then
         sudo rm -r $SOURCE_CODE_GIT_DIR
-        echo -e "\n\e[32m✓ Source code .git directory has been found and deleted!\e[0m\n"
+        userMessage success "Source code .git directory has been found and deleted!"
     else
-        echo -e "\n\e[34m🛈  No existing source code .git directory has been found. There's nothing to delete.\e[0m\n"
+        userMessage info "No existing source code .git directory has been found. There's nothing to delete."
     fi
 
     # Move October CMS source code from temporary directory and delete it
@@ -79,9 +80,9 @@ else
 
     if [ $? -eq 0 ]
     then
-        echo -e "\n\e[32m✓ Composer dependencies have been installed!\e[0m\n"
+        userMessage success "Composer dependencies have been installed!"
     else
-        echo -e "\n\e[31m❌ \e[3mCan't install Composer dependencies!\e[0m\n"
+        userMessage error "Can't install Composer dependencies!"
     fi
 fi
 
@@ -115,9 +116,9 @@ if [ -e $ENV_FILE ]; then
     envSetup
 
     if [[ "$ENV_SED_RESULT" = true ]]; then
-        echo -e "\n\e[32m✓ .env file has been found and was configured!\e[0m\n"
+        userMessage success ".env file has been found and was configured!"
     else
-        echo -e "\n\e[31m❌ \e[3m.env file has been found but wasn't configured!\e[0m\n"
+        userMessage error ".env file has been found but wasn't configured!"
     fi
 else
     function envCreateSetup {
@@ -140,9 +141,9 @@ else
     envCreateSetup
 
     if [[ "$ENV_SED_RESULT" = true ]]; then
-        echo -e "\n\e[32m✓ .env file hasn't been found, was created and configured.\e[0m\n"
+        userMessage success ".env file hasn't been found, was created and configured."
     else
-        echo -e "\n\e[31m❌ \e[3m.env file hasn't been found and wasn't created or configured!\e[0m\n"
+        userMessage error ".env file hasn't been found and wasn't created or configured!"
     fi
 fi
 
@@ -150,17 +151,17 @@ fi
 sudo mysql -p$DB_PASSWORD -u$DB_USER -e "DROP DATABASE IF EXISTS \`$DB_NAME\`; CREATE DATABASE \`$DB_NAME\` CHARACTER SET $DB_CHARACTER_SET COLLATE $DB_COLLATION;"
 
 if [[ $? -eq 0 ]]; then
-    echo -e "\n\e[32m✓ New database has been created (old was dropped if existed)!\e[0m\n"
+    userMessage success "New database has been created (old was dropped if existed)!"
 else
-    echo -e "\n\e[31m❌ Can't create new database.\e[0m\n"
+    userMessage error "Can't create new database."
 fi
 
 # Install October CMS
 php artisan october:up
 if [[ $? -eq 0 ]]; then
-    echo -e "\n\e[32m✓ October CMS has been installed!\e[0m\n"
+    userMessage success "October CMS has been installed!"
 else
-    echo -e "\n\e[31m❌ October CMS hasn't been installed!\e[0m\n"
+    userMessage error "October CMS hasn't been installed!"
 fi
 
 # Installing project theme
@@ -178,14 +179,14 @@ if [[ "$THEME_DRAFT_INSTALL" = true ]]; then
         shopt -s dotglob
         rm -rf $THEME_DIR_TEMP
         shopt -u dotglob
-        echo -e "\n\e[32m✓ Existed project theme was deleted!\e[0m\n"
+        userMessage warning "Existed project theme was deleted!"
     elif [ -d "$THEME_DIR" ]; then
         shopt -s dotglob
         rm -rf $THEME_DIR
         shopt -u dotglob
-        echo -e "\n\e[32m⚠ Existed project theme was deleted!\e[0m\n"
+        userMessage warning "Existed project theme was deleted!"
     else
-        echo -e "\n\e[34m🛈  Nothing to delete!\e[0m\n"
+        userMessage info "Nothing to delete!"
     fi
 
     sleep 0.5
@@ -200,18 +201,18 @@ if [[ "$THEME_DRAFT_INSTALL" = true ]]; then
         rm $THEMES_DIR/README.md
         mv $THEME_DIR_TEMP $THEME_DIR
         shopt -u dotglob
-        echo -e "\n\e[32m✓ Draft theme is ready to install!\e[0m\n"
+        userMessage success "Draft theme is ready to install!"
     else
-        echo -e "\n\e[31m❌ Can't clone draft theme!\e[0m\n"
+        userMessage success "Can't clone draft theme!"
     fi
 
     if [ -d "$THEME_DIR" ]; then
         sed -i "s/THEME_NAME/$PROJECT_NAME/g" $THEME_DIR/layouts/main.htm $THEME_DIR/theme.yaml
         if [[ $? -eq 0 ]]; then
             php artisan theme:use $PROJECT_NAME
-            echo -e "\n\n\e[32m✓ Draft theme is installed!\e[0m\n"
+            userMessage success "Draft theme is installed!"
         else
-            echo -e "\n\e[31m❌ Can't install draft theme!\e[0m\n"
+            userMessage error "Can't install draft theme!"
         fi
     else
         echo -e "\n\e[34m🛈  Nothing to delete!\e[0m\n"

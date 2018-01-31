@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+# Get the path of the executable script
+CFG_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $CFG_PATH/config.cfg
+
+# Call reusable functions
+source $CFG_PATH/functions.sh
+
 # ----------------------------------------------------------------------
 # STEP. Check settings variables initialization
 # ----------------------------------------------------------------------
@@ -10,16 +17,12 @@ CFG_FILE=./bash/project/config.cfg
 CFG_EXAMPLE_FILE=./bash/project/config.cfg.example
 if [ -e $CFG_FILE ]; then
 
-    # Get the path of the executable script
-    CFG_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-    . $CFG_PATH/config.cfg
-
     # Define check status of config variables
     CHECK_PASSED=true
 
     # Check config variables for initialization
     sleep 0.5
-    echo -e "\n\e[32m✓ config.cfg file was found.\e[0m\n"
+    userMessage success "config.cfg file was found."
     echo -e "In case of errors or mistakes in project settings fix them in \e[3m./bash/project/config.cfg\e[0m.\n"
     for VARIABLE in PROJECT_NAME PROJECTS_DIR VIRTUALHOST_NAME DB_NAME DB_USER DB_PASSWORD DB_CHARACTER_SET DB_COLLATION OC_GIT_INSTALL THEME_DRAFT_INSTALL
     do
@@ -60,8 +63,8 @@ else
     sleep 0.5
     cp $CFG_EXAMPLE_FILE $CFG_DIR/config.cfg
     if [ $? -eq 0 ]; then
-        echo -e "\n\e[38;5;166m⚠ config.cfg file was not found and was created from an example. It must be configured!\e[0m\n"
+        userMessage warning "config.cfg file was not found and was created from an example. It must be configured!"
     else
-        echo -e "\n\e[31m❌ config.cfg file was not found and can't be created from an example. Create and configure it manually!\e[0m\n"
+        userMessage error "config.cfg file was not found and can't be created from an example. Create and configure it manually!"
     fi
 fi
