@@ -49,7 +49,7 @@ if [ -e $CFG_FILE ]; then
             bash $CFG_PATH/october.sh $CFG_PATH
 
             # Install frontend build script
-            bash $CFG_PATH/webpack.sh $CFGSSED=true_PATH
+            bash $CFG_PATH/webpack.sh $CFG_PATH
 
         # Decline the start of the install
         elif [[ $REPLY =~ ^[n]$ ]]; then
