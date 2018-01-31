@@ -6,7 +6,7 @@ source $1/functions.sh
 # ----------------------------------------------------------------------
 # STEP. Install frontend build scripts
 # ----------------------------------------------------------------------
-echo -e "\n\e[7m       INSTALL FRONTEND BUILD SCRIPTS (STEP 4/7)       \e[0m\n"
+echo -e "\n\e[7m       INSTALL FRONTEND BUILD SCRIPTS (STEP 4/5)       \e[0m\n"
 # Configure Webpack and NPM
 sed -i "s/THEME_NAME/$PROJECT_NAME/g" ./webpack.config.babel.js ./package.json
 if [ $? -eq 0 ]

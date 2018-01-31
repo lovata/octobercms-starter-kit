@@ -10,7 +10,7 @@ source $CFG_PATH/functions.sh
 # ----------------------------------------------------------------------
 # STEP. Check settings variables initialization
 # ----------------------------------------------------------------------
-echo -e "\n\e[7m          CHECK PROJECT SETTINGS (STEP 1/7)          \e[0m\n"
+echo -e "\n\e[7m          CHECK PROJECT SETTINGS (STEP 1/5)          \e[0m\n"
 
 CFG_DIR=./bash/project
 CFG_FILE=./bash/project/config.cfg

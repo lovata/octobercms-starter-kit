@@ -8,7 +8,7 @@ source $1/functions.sh
 # ----------------------------------------------------------------------
 
 sleep 0.5
-echo -e "\n\e[7m       PREPARE PROJECT DIRECTORY FOR INSTALL (STEP 2/7)       \e[0m\n"
+echo -e "\n\e[7m       PREPARE PROJECT DIRECTORY FOR INSTALL (STEP 2/5)       \e[0m\n"
 
 # Delete October CMS Starter Kit Git directory if exists
 GIT_DIR=./.git
