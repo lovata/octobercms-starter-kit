@@ -212,7 +212,7 @@ if [[ "$THEME_DRAFT_INSTALL" = true ]]; then
     fi
 
     if [ -d "$THEME_DIR" ]; then
-        sed -i "s/THEME_NAME/$PROJECT_NAME/g" $THEME_DIR/layouts/main.htm $THEME_DIR/theme.yaml
+        sed -i "s/THEME_NAME/$PROJECT_NAME/g" $THEME_DIR/layouts/main.htm $THEME_DIR/theme.yaml webpack.config.babel.js
         if [[ $? -eq 0 ]]; then
             php artisan theme:use $PROJECT_NAME
             userMessage success "Draft theme is installed!"
