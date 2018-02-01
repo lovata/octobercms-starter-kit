@@ -88,6 +88,7 @@ fi
 
 # Setup October CMS local environment
 sleep 0.5
+
 ENV_FILE=.env
 ENV_SED_RESULT=true
 
@@ -113,6 +114,8 @@ function envSetup {
 }
 
 if [ -e $ENV_FILE ]; then
+    envExampleCreate
+
     envSetup
 
     if [[ "$ENV_SED_RESULT" = true ]]; then
@@ -130,10 +133,12 @@ else
         APP_KEY='APP_KEY=CHANGE_ME!!!!!!!!!!!!!!!!!!!!!!!'
         APP_KEY_RANDOM=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
         APP_KEY_CHANGE='s/'$APP_KEY'/APP_KEY='$APP_KEY_RANDOM'/'
-        sed -i $APP_KEY_CHANGE .env
+        sed -i $APP_KEY_CHANGE $ENV_FILE
         if [[ $? -ne 0 ]]; then
             ENV_SED_RESULT=false
         fi
+
+        envExampleCreate
 
         envSetup
     }

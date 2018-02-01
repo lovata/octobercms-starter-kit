@@ -63,3 +63,30 @@ function apacheReload {
         userMessage error "Apache project virtualhost was created but wasn't enabled! Reload Apache manually!"
     fi
 }
+
+# Create example of the .env file
+function envExampleCreate {
+    # Check for existing .env.example
+    ENV_EXAMPLE_FILE=.env.example
+    if [[ -e $ENV_EXAMPLE_FILE ]]; then
+        # Delete existing .env.example
+        rm $ENV_EXAMPLE_FILE
+        if [[ $? -ne 0 ]]; then
+            userMessage warning "Can't delete existing '.env.example' file. Clear its content, copy content of the .env file and clear values for these variables: APP_ASSETS, DB_DATABASE, DB_PASSWORD!"
+        fi
+    fi
+
+    # Copy .env as an example
+    cp $ENV_FILE $ENV_EXAMPLE_FILE
+    if [ $? -eq 0 ]; then
+        # Add assets variable
+        sed -i "1i APP_ASSETS=" $ENV_FILE
+        if [ $? -eq 0 ]; then
+            userMessage success "Example of the .env file was created '.env.example'."
+        else
+            userMessage warning "Example of the .env file was created as '.env.example' but 'APP_ASSETS=' wasn't added! Add it manually to the first line!"
+        fi
+    else
+        userMessage warning "Example of the .env file wasn't created. Do it manually as '.env.example' and 'APP_ASSETS=' to the first line!"
+    fi
+}
