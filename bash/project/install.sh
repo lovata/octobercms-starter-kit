@@ -51,6 +51,9 @@ if [ -e $CFG_FILE ]; then
             # Install frontend build script
             bash $CFG_PATH/webpack.sh $CFG_PATH
 
+            # Configure Apache virtualhost
+            bash $CFG_PATH/virtualhost.sh $CFG_PATH
+
         # Decline the start of the install
         elif [[ $REPLY =~ ^[n]$ ]]; then
             echo -e "\n\e[38;5;208m\e[7m          Installation canceled by user!          \e[0m\n"
