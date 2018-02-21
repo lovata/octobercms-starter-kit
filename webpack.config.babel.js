@@ -15,7 +15,7 @@ import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 
 let config = {
     entry: {
-        [prefix + 'main']: path.resolve('themes/THEME_NAME/main.js')
+        [prefix + 'main']: path.resolve('themes/THEME_NAME/common.js')
     },
     output: {
         path: path.resolve('themes/THEME_NAME/assets'),
