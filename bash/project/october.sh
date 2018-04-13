@@ -223,7 +223,7 @@ if [[ "$THEME_DRAFT_INSTALL" = true ]]; then
     fi
 fi
 
-# The replacement of the October CMS README fiel to project README file
+# The replacement of the October CMS README file to project README file
 README_FILE="./README.md"
 README_FILE_EXAMPLE="./README.md.example"
 sleep 0.5
@@ -232,4 +232,15 @@ if [[ -e $README_FILE_EXAMPLE ]]; then
     userMessage success "October CMS README.md was replaced by project README.md."
 else
     userMessage warning "No project README.md was for the replacement! Don't forget to add it later!"
+fi
+
+# The replacement of the October CMS gitignore file to project gitignore file
+GITIGNORE_FILE="./.gitignore"
+GITIGNORE_FILE_EXAMPLE="./.gitignore.example"
+sleep 0.5
+if [[ -e $GITIGNORE_FILE_EXAMPLE ]]; then
+    mv $GITIGNORE_FILE_EXAMPLE ./$GITIGNORE_FILE
+    userMessage success "October CMS .gitignore was replaced by project .gitignore."
+else
+    userMessage warning "No project .gitignore was for the replacement! Don't forget to add it later!"
 fi
