@@ -19,13 +19,3 @@ if [ -d "$GIT_DIR" ]; then
 else
     userMessage info "No Git directory to delete."
 fi
-
-# Prevent October CMS Starter Kit README from replacement
-README_FILE="./README.md"
-sleep 0.5
-if [[ -e $README_FILE ]]; then
-    mv ./README.md ./README.STARTERKIT.md
-    userMessage success "Backup of project README.md was created."
-else
-    userMessage warning "No project README.md was a found for backup! Don't forget to add it later!"
-fi

@@ -24,21 +24,3 @@ then
 else
     userMessage error "NPM packages were not installed!"
 fi
-
-# Backup October CMS README.md
-mv ./README.md ./README.OCTOBER.md
-if [ $? -eq 0 ]
-then
-    userMessage success "Backup of October CMS README.md was created."
-else
-    userMessage warning "Backup of October CMS README.md wasn't created!"
-fi
-
-# Restore project README.md
-mv ./README.STARTERKIT.md ./README.md
-if [ $? -eq 0 ]
-then
-    userMessage success "October CMS README.md was restored."
-else
-    userMessage warning "October CMS README.md wasn't restored! Don't forget to add it later!"
-fi

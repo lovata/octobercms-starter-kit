@@ -170,7 +170,6 @@ else
 fi
 
 # Installing project theme
-
 if [[ "$THEME_DRAFT_INSTALL" = true ]]; then
 
     THEMES_DIR=./themes
@@ -222,4 +221,15 @@ if [[ "$THEME_DRAFT_INSTALL" = true ]]; then
     else
         echo -e "\n\e[34m🛈  Nothing to delete!\e[0m\n"
     fi
+fi
+
+# The replacement of the October CMS README fiel to project README file
+README_FILE="./README.md"
+README_FILE_EXAMPLE="./README.md.example"
+sleep 0.5
+if [[ -e $README_FILE_EXAMPLE ]]; then
+    mv $README_FILE_EXAMPLE ./$README_FILE
+    userMessage success "October CMS README.md was replaced by project README.md."
+else
+    userMessage warning "No project README.md was for the replacement! Don't forget to add it later!"
 fi
