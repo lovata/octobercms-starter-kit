@@ -11,7 +11,6 @@ if $VAGRANT; then
     bash /vagrant/bash/environment/composer.sh
     bash /vagrant/bash/environment/mysql.sh
     bash /vagrant/bash/environment/nodejs.sh
-    bash /vagrant/bash/environment/npm.sh
 else
     echo "Install in local environment…"
 fi
