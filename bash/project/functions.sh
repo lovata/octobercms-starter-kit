@@ -95,12 +95,20 @@ function envExampleCreate {
 function staticFilesImport {
     ZIP_FILE=$1.zip
     URL_IMPORT=https://bitbucket.org/$GIT_TEAM/$PROJECT_NAME/downloads/$ZIP_FILE
+    URL_EXPORT=https://api.bitbucket.org/2.0/repositories/$GIT_TEAM/$PROJECT_NAME/downloads
 
     # Check for archive existing
     if curl -u $GIT_USER:$GIT_PASSWORD --output /dev/null --silent --head --fail $URL_IMPORT; then
         # Download archive
         userMessage success "File $ZIP_FILE exist. Downloading…"
         curl -u $GIT_USER:$GIT_PASSWORD -L -O $URL_IMPORT
+
+        # Make & upload backup
+        ZIP_FILE_BACKUP=$1_backup.zip
+        cp $ZIP_FILE $ZIP_FILE_BACKUP
+        curl -X POST --user $GIT_USER:$GIT_PASSWORD $URL_EXPORT --form files=@"$ZIP_FILE_BACKUP"
+        rm $ZIP_FILE_BACKUP
+
         # Unzip & remove archive
         unzipRemoveArchive $1
     else
