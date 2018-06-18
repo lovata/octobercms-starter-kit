@@ -90,3 +90,52 @@ function envExampleCreate {
         userMessage warning "Example of the .env file wasn't created. Do it manually as '.env.example' and 'APP_ASSETS=' to the first line!"
     fi
 }
+
+# Downloading static files
+function staticFilesImport {
+    ZIP_FILE=$1.zip
+    URL_IMPORT=https://bitbucket.org/$GIT_TEAM/$PROJECT_NAME/downloads/$ZIP_FILE
+
+    # Check for archive existing
+    if curl -u $GIT_USER:$GIT_PASSWORD --output /dev/null --silent --head --fail $URL_IMPORT; then
+        # Download archive
+        userMessage success "File $ZIP_FILE exist. Downloading…"
+        curl -u $GIT_USER:$GIT_PASSWORD -L -O $URL_IMPORT
+        # Unzip & remove archive
+        unzipRemoveArchive $1
+    else
+        userMessage info "File $ZIP_FILE doesn't exist. Nothing to download."
+    fi
+}
+
+# Uploading static files
+function staticFilesExport {
+    
+    ZIP_FILE=$1.zip
+    DIR_STATIC=$2
+
+    if [ -d "$DIR_STATIC/$1" ]; then
+
+        # Make zip archive
+        userMessage success "Directory $DIR_STATIC/$1 exist. Packing & Uploading…"
+        zip -r $ZIP_FILE $DIR_STATIC/$1
+
+        # Upload zip archive
+        URL_EXPORT=https://api.bitbucket.org/2.0/repositories/$GIT_TEAM/$PROJECT_NAME/downloads
+
+        curl -X POST --user $GIT_USER:$GIT_PASSWORD $URL_EXPORT --form files=@"$ZIP_FILE"
+
+        # Remove zip achive
+        rm $ZIP_FILE
+    else
+        userMessage info "Directory $DIR_STATIC/$1 doesn't exist. Nothing to upload."
+    fi
+}
+
+# Unzip & remove archive
+function unzipRemoveArchive {
+    ZIP_FILE=$1.zip
+
+    unzip -o $ZIP_FILE
+    rm $ZIP_FILE
+}
