@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-source bash/project/config.cfg
-source bash/project/functions.sh
+source bash/project/config.cfg  # TODO: replace relative path #
+source bash/project/functions.sh # TODO: replace relative path #
 
 DIR_META=meta
 DIR_CONTENT=content

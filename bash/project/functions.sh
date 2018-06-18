@@ -94,8 +94,8 @@ function envExampleCreate {
 # Downloading static files
 function staticFilesImport {
     ZIP_FILE=$1.zip
-    URL_IMPORT=https://bitbucket.org/$GIT_TEAM/$PROJECT_NAME/downloads/$ZIP_FILE
-    URL_EXPORT=https://api.bitbucket.org/2.0/repositories/$GIT_TEAM/$PROJECT_NAME/downloads
+    URL_IMPORT=https://bitbucket.org/$GIT_TEAM/$PROJECT_NAME/downloads/$ZIP_FILE # TODO: move to config #
+    URL_EXPORT=https://api.bitbucket.org/2.0/repositories/$GIT_TEAM/$PROJECT_NAME/downloads # TODO: move to config #
 
     # Check for archive existing
     if curl -u $GIT_USER:$GIT_PASSWORD --output /dev/null --silent --head --fail $URL_IMPORT; then
