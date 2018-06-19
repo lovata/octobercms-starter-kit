@@ -175,3 +175,29 @@ function mysqlExport {
     fi
 }
 
+# Upload file to Bitbucket downloads
+function fileUpload {
+    FILE=$1
+    FILE_URL_DOWNLOAD=$URL_BITBUCKET_DOWNLOADS/$FILE
+    FILE_URL_UPLOAD=$URL_BITBUCKET_API/downloads
+
+    # Check for file existing
+    if [[ -e $FILE ]]; then
+        userMessage info "File $FILE exist. Uploading…"
+        curl -X POST --user $GIT_USERS:$GIT_PASSWORD $FILE_URL_UPLOAD --form files=@"$FILE"
+        
+        # Check for file existing in Bitbucket downloads since there are no exit code with cURL (API) athentification error
+        if [[ $? -eq 0 ]]; then
+            if curl -u $GIT_USER:$GIT_PASSWORD --output /dev/null --silent --head --fail $FILE_URL_DOWNLOAD; then
+                userMessage success "File has been uploaded successfully!"
+            else
+                userMessage error "Error when uploading file!"
+            fi
+        else
+            userMessage error "Error when uploading file!"
+        fi
+    else
+        userMessage info "File '$FILE' doesn't exist. Nothing to upload."
+    fi
+}
+
