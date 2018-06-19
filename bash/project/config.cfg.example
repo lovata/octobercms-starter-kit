@@ -10,3 +10,6 @@ THEME_GIT_PATH=https://github.com/lovata/octobercms-theme-draft.git
 OC_GIT_INSTALL=false
 OC_VERSION=1.0.432
 THEME_DRAFT_INSTALL=true
+GIT_USER=
+GIT_PASSWORD=
+GIT_TEAM=
