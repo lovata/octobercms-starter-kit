@@ -10,6 +10,7 @@ DIR_MEDIA=media
 
 PATH_THEMES=themes/$PROJECT_NAME
 PATH_STORAGE=storage/app
+PATH_ROOT=./
 
 # Import meta directory
 staticFilesImport $DIR_META
