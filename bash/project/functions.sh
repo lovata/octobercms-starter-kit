@@ -175,6 +175,23 @@ function mysqlExport {
     fi
 }
 
+# Download file from Bitbucket downloads
+function fileDownload {
+    FILE=$1
+    FILE_URL_DOWNLOAD=$URL_BITBUCKET_DOWNLOADS/$FILE
+    FILE_URL_UPLOAD=$URL_BITBUCKET_API/downloads
+
+    # Check for file existing
+    if curl -u $GIT_USER:$GIT_PASSWORD --output /dev/null --silent --head --fail $FILE_URL_DOWNLOAD; then
+        
+        # Download file
+        userMessage success "File $FILE exist. Downloading…"
+        curl -u $GIT_USER:$GIT_PASSWORD -L -O $FILE_URL_DOWNLOAD
+    else
+        userMessage info "File '$FILE' doesn't exist. Nothing to download."
+    fi
+}
+
 # Upload file to Bitbucket downloads
 function fileUpload {
     FILE=$1
