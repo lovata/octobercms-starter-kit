@@ -146,4 +146,16 @@ function unzipRemoveArchive {
 
     unzip -o $ZIP_FILE
     rm $ZIP_FILE
+# Export MySQL dump
+function mysqlExport {
+    FILE_DB_DUMP=$DB_NAME.sql
+    userMessage info "Enter password for MySQL user $DB_USER."
+    mysqldump -u $DB_USER -p $DB_NAME > $FILE_DB_DUMP
+
+    if [[ $? -eq 0 ]]; then
+        userMessage success "MySQL dump has been exported successfully!"
+    else
+        userMessage error "Error while exporting MySQL dump!"
+    fi
 }
+
