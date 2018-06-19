@@ -146,6 +146,15 @@ function unzipRemoveArchive {
 
     unzip -o $ZIP_FILE
     rm $ZIP_FILE
+}
+
+# Zip files
+function zipRemoveArchive {
+    FILE_ZIP=$1.zip
+    zip -r $FILE_ZIP $2
+    rm $2
+}
+
 # Zip file
 function zipFile {
     FILE=$1
