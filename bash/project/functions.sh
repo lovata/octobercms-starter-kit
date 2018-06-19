@@ -201,3 +201,29 @@ function fileUpload {
     fi
 }
 
+# Backup file in Bitbucket downloads
+function fileBackup {
+    FILE=$1
+    FILE_BACKUP=${FILE%.*}_backup.${FILE##*.}
+    FILE_URL_DOWNLOAD=$URL_BITBUCKET_DOWNLOADS/$FILE
+    FILE_URL_UPLOAD=$URL_BITBUCKET_API/downloads
+
+    # Check for file existing
+    if curl -u $GIT_USER:$GIT_PASSWORD --output /dev/null --silent --head --fail $FILE_URL_DOWNLOAD; then
+        userMessage info "File $FILE exist and ready for backup."
+
+        # Download file
+        fileDownload $FILE
+        
+        # Upload zip archive
+        if [[ -e $FILE ]]; then
+            userMessage success "File $FILE has been downloaded ready for backup."
+            mv $FILE $FILE_BACKUP
+            fileUpload $FILE_BACKUP
+        else
+            userMessage error "File '$FILE' doesn't exist. Nothing to backup."
+        fi
+    else
+        userMessage info "File '$FILE' doesn't exist. Nothing to backup."
+    fi
+}
