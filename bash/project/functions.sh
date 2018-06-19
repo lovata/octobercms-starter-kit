@@ -184,7 +184,7 @@ function fileUpload {
     # Check for file existing
     if [[ -e $FILE ]]; then
         userMessage info "File $FILE exist. Uploading…"
-        curl -X POST --user $GIT_USERS:$GIT_PASSWORD $FILE_URL_UPLOAD --form files=@"$FILE"
+        curl -X POST --user $GIT_USER:$GIT_PASSWORD $FILE_URL_UPLOAD --form files=@"$FILE"
         
         # Check for file existing in Bitbucket downloads since there are no exit code with cURL (API) athentification error
         if [[ $? -eq 0 ]]; then
