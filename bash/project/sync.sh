@@ -14,13 +14,13 @@ PATH_STORAGE=storage/app
 # Import meta directory
 staticFilesImport $DIR_META
 
-# # Import content directory
+# Import content directory
 staticFilesImport $DIR_CONTENT
 
-# # Import uploads directory
+# Import uploads directory
 staticFilesImport $DIR_UPLOADS
 
-# # Import media directory
+# Import media directory
 staticFilesImport $DIR_MEDIA
 
 # Export meta directory
