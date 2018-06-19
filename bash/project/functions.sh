@@ -180,7 +180,7 @@ function zipFile {
 
 # Export MySQL dump
 function mysqlExport {
-    FILE_DB_DUMP=$DB_NAME.sql
+    FILE_DB_DUMP=$1.sql
     userMessage info "Enter password for MySQL user $DB_USER."
     mysqldump -u $DB_USER -p $DB_NAME > $FILE_DB_DUMP
 
