@@ -135,8 +135,15 @@ function staticFilesExport {
 
         # Remove zip achive
         rm $ZIP_FILE
+
+    elif [[ -e $1 ]]; then
+        
+        # Upload zip archive
+        URL_EXPORT=https://api.bitbucket.org/2.0/repositories/$GIT_TEAM/$PROJECT_NAME/downloads
+
+        curl -X POST --user $GIT_USER:$GIT_PASSWORD $URL_EXPORT --form files=@"$1"
     else
-        userMessage info "Directory $DIR_STATIC/$1 doesn't exist. Nothing to upload."
+        userMessage info "Directory '$DIR_STATIC' or file '$1' doesn't exist. Nothing to upload."
     fi
 }
 
