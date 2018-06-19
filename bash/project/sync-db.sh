@@ -9,12 +9,12 @@ if [[ "$1" == "export" ]]; then
     fileBackup $FILE_TARGET
     rm $FILE_BACKUP
 
-    # mysqlExport
-    # zipFile $FILE_DB_DUMP
-    # rm $FILE_DB_DUMP
+    mysqlExport
+    zipFile $FILE_DB_DUMP
+    rm $FILE_DB_DUMP
 
-    # fileUpload $FILE_ZIPPED
-    # rm $FILE_ZIPPED
+    fileUpload $FILE_ZIPPED
+    rm $FILE_ZIPPED
 elif [[ "$1" = "import" ]]; then
     # Import MySQL dump
     echo "MySQL dump feature will be added later"
