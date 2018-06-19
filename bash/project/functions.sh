@@ -146,6 +146,22 @@ function unzipRemoveArchive {
 
     unzip -o $ZIP_FILE
     rm $ZIP_FILE
+# Zip file
+function zipFile {
+    FILE=$1
+    FILE_NAME=$(echo "$1" | cut -f 1 -d '.')
+    FILE_ZIPPED=$FILE_NAME.zip
+    
+    userMessage info "File $FILE exist. Archiving…"
+    zip $FILE_ZIPPED $FILE
+
+    if [[ $? -eq 0 ]]; then
+        userMessage success "The file was successfully archived!"
+    else
+        userMessage error "Error while archiving file!"
+    fi
+}
+
 # Export MySQL dump
 function mysqlExport {
     FILE_DB_DUMP=$DB_NAME.sql
