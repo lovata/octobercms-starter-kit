@@ -10,7 +10,7 @@ if [[ "$1" == "export" ]]; then
     rm $FILE_BACKUP
 
     mysqlExport $DB_NAME
-    zipFile $FILE_DB_DUMP
+    fileZip $FILE_DB_DUMP
     rm $FILE_DB_DUMP
 
     fileUpload $FILE_ZIPPED

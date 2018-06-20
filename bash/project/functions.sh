@@ -164,6 +164,8 @@ function zipRemoveArchive {
 
 # Zip file
 function zipFile {
+# Zip single file
+function fileZip {
     FILE=$1
     FILE_NAME=$(echo "$1" | cut -f 1 -d '.')
     FILE_ZIPPED=$FILE_NAME.zip
