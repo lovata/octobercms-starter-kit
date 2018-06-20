@@ -169,7 +169,7 @@ function zipFile {
     FILE_ZIPPED=$FILE_NAME.zip
     
     userMessage info "File $FILE exist. Archiving…"
-    zip $FILE_ZIPPED $FILE
+    zip $FILE_ZIPPED $FILE # TODO: add -m argument to delete original files. zip –m filename.zip file.txt. Dele rm command in othe files. Add -v option to enable the display of a progress indicator during compression. #
 
     if [[ $? -eq 0 ]]; then
         userMessage success "The file was successfully archived!"
