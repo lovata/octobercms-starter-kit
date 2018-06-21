@@ -16,8 +16,7 @@ if [[ "$1" == "export" ]]; then
     fileUpload $FILE_ZIPPED
     rm $FILE_ZIPPED
 elif [[ "$1" = "import" ]]; then
-    # Import MySQL dump
-    echo "MySQL dump feature will be added later"
+    mysqlImport $DB_NAME
 else
   userMessage warning "Please, call argument 'export' or 'import'!"
 fi

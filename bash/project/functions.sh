@@ -193,6 +193,29 @@ function mysqlExport {
     fi
 }
 
+# Import MySQL dump
+function mysqlImport {
+    FILE_DB_DUMP=$1.sql
+
+    if [[ -e $FILE_DB_DUMP ]]; then
+        userMessage info "Enter password for MySQL user $DB_USER."
+        mysql -p$DB_PASSWORD -u$DB_USER -e "DROP DATABASE IF EXISTS \`$DB_NAME\`; CREATE DATABASE \`$DB_NAME\` CHARACTER SET $DB_CHARACTER_SET COLLATE $DB_COLLATION;"
+        if [[ $? -eq 0 ]]; then
+            mysql -u $DB_USER -p $DB_NAME < $DB_NAME.sql
+            
+            if [[ $? -eq 0 ]]; then
+                userMessage success "MySQL dump has been imported successfully!"
+            else
+                userMessage error "Error while importing MySQL dump!"
+            fi
+        else
+            userMessage error "Error while droping MySQL dump!"
+        fi  
+    else
+        userMessage error "Can't find $FILE_DB_DUMP file!"
+    fi
+}
+
 # Download file from Bitbucket downloads
 function fileDownload {
     FILE=$1
