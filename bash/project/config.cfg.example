@@ -13,3 +13,5 @@ THEME_DRAFT_INSTALL=true
 GIT_USER=
 GIT_PASSWORD=
 GIT_TEAM=
+URL_BITBUCKET_DOWNLOADS=https://bitbucket.org/$GIT_TEAM/$PROJECT_NAME/downloads 
+URL_BITBUCKET_API=https://api.bitbucket.org/2.0/repositories/$GIT_TEAM/$PROJECT_NAME
