@@ -170,13 +170,13 @@ function fileZip {
     FILE_NAME=$(echo "$1" | cut -f 1 -d '.')
     FILE_ZIPPED=$FILE_NAME.zip
     
-    userMessage info "File $FILE exist. Archiving…"
+    userMessage info "File $FILE exist. Archiving…" # TODO: Add checking for file existing. #
     zip $FILE_ZIPPED $FILE # TODO: add -m argument to delete original files. zip –m filename.zip file.txt. Dele rm command in othe files. Add -v option to enable the display of a progress indicator during compression. #
 
     if [[ $? -eq 0 ]]; then
-        userMessage success "The file was successfully archived!"
+        userMessage success "The file $FILE was successfully archived!"
     else
-        userMessage error "Error while archiving file!"
+        userMessage error "Error while archiving file $FILE!"
     fi
 }
 
