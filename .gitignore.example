@@ -11,15 +11,19 @@ Homestead.yaml
 Homestead.json
 
 # ------------------------------
-# OctoberCMS
+# October CMS
 # ------------------------------
 
+# October CMS
 /public
 /storage/framework/classes.php
 /themes/*/assets/css
 /themes/*/assets/js
 /themes/*/content
 /themes/*/meta
+
+# October CMS Starter Kit by LOVATA
+/bash/project/config.cfg
 
 # ------------------------------
 # Node.js
