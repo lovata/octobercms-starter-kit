@@ -162,8 +162,6 @@ function zipRemoveArchive {
     rm $2
 }
 
-# Zip file
-function zipFile {
 # Zip single file
 function fileZip {
     FILE=$1
