@@ -54,7 +54,8 @@ let config = {
         }),
         extractTextCSS,
         new StyleLintPlugin({
-            files: ['themes/THEME_NAME/*.css', 'themes/THEME_NAME/styles/**/*.css']
+            files: ['themes/THEME_NAME/*.css', 'themes/THEME_NAME/styles/**/*.css'],
+            failOnError: true
         })
     ],
     module: {
