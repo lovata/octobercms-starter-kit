@@ -24,7 +24,7 @@ This Starter kit includes a set of scripts for full automated install of  Octobe
 
 To start new October CMS project follow these steps:
 
-1. Clone Starter kit repository using `git clone git@github.com:lovata/october-starter-kit.git` or `https://github.com/lovata/october-starter-kit.git`.
+1. Clone Starter kit repository using `git clone git@github.com:lovata/octobercms-starter-kit.git` or `https://github.com/lovata/octobercms-starter-kit.git`.
 
 2. Setup you project in `bash/install/config.cfg` by specifying project settings:
 ```
