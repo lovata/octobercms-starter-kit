@@ -1,5 +1,8 @@
 import path from 'path';
 import webpack from 'webpack';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import ImageminPlugin from 'imagemin-webpack-plugin';
+import imageminMozjpeg from 'imagemin-mozjpeg';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
@@ -33,6 +36,19 @@ const config = {
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
+    new CopyWebpackPlugin([{
+      from: 'themes/THEME_NAME/src/img/',
+      to: 'img/',
+    }]),
+    new ImageminPlugin({
+      test: /\.(jpe?g|png|svg)$/i,
+      plugins: [
+        imageminMozjpeg({
+          quality: 60,
+          progressive: true,
+        }),
+      ],
+    }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
       chunkFilename: '[id].css',
@@ -100,6 +116,33 @@ const config = {
         },
       ],
     },
+    // {
+    //   test: /\.(gif|png|jpe?g|svg)$/,
+    //   use: [
+    //     'file-loader?name=img/[name].[ext]',
+    //     {
+    //       loader: 'image-webpack-loader',
+    //       options: {
+    //         mozjpeg: {
+    //           quality: 65,
+    //         },
+    //         optipng: {
+    //           enabled: false,
+    //         },
+    //         pngquant: {
+    //           quality: '65-90',
+    //           speed: 4,
+    //         },
+    //         gifsicle: {
+    //           interlaced: false,
+    //         },
+    //         // webp: {
+    //         //   quality: 75,
+    //         // },
+    //       },
+    //     },
+    //   ],
+    // },
     ],
   },
 };
