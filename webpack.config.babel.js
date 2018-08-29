@@ -100,21 +100,13 @@ const config = {
     },
     {
       test: /\.(png|jpe?g|svg)$/,
-      use: [
-        'file-loader?name=img/[name].[ext]',
-        {
-          loader: 'image-webpack-loader',
-          options: {
-            mozjpeg: {
-              quality: 65,
-            },
-            pngquant: {
-              quality: '65-90',
-              speed: 4,
-            },
-          },
+      use: [{
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: '/img',
         },
-      ],
+      }],
     },
     ],
   },
