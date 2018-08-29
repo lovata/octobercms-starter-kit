@@ -8,7 +8,9 @@ module.exports = {
     },
     'postcss-css-variables': {},
     'postcss-nested': {},
-    'postcss-preset-env': {},
+    'postcss-preset-env': {
+      stage: 3,
+    },
     autoprefixer: {},
   },
 };
