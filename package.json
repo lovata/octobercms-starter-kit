@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build:watch": "NODE_ENV=development WATCH=watch webpack",
+    "build:watch": "NODE_ENV=development webpack --watch",
     "build:dev": "NODE_ENV=development webpack",
     "build:prod": "webpack",
     "build:clean": "./node_modules/.bin/rimraf ./themes/THEME_NAME/assets/css && ./node_modules/.bin/rimraf ./themes/THEME_NAME/assets/js"
@@ -42,7 +42,7 @@
     "style-loader": "^0.19.1",
     "stylelint": "^9.2.1",
     "stylelint-config-standard": "^18.0.0",
-    "stylelint-webpack-plugin": "^0.9.0",
+    "stylelint-webpack-plugin": "^0.10.5",
     "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0"
