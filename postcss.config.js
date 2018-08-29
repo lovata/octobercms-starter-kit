@@ -6,7 +6,6 @@ module.exports = {
     'postcss-url': {
       url: "rebase",
     },
-    'postcss-css-variables': {},
     'postcss-nested': {},
     'postcss-preset-env': {
       stage: 3,
