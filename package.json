@@ -12,7 +12,6 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "clean-webpack-plugin": "^0.1.17",
-    "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^0.28.8",
     "csso-webpack-plugin": "^1.0.0-beta.10",
     "eslint": "^4.19.1",
