@@ -2,9 +2,9 @@
   "scripts": {
     "build:watch": "NODE_ENV=development webpack --watch",
     "build:dev": "NODE_ENV=development webpack",
-    "build:prod": "webpack && npm run optimize-images",
+    "build:prod": "webpack && npm run optimize:images",
     "build:clean": "./node_modules/.bin/rimraf ./themes/THEME_NAME/assets/css && ./node_modules/.bin/rimraf ./themes/THEME_NAME/assets/js",
-    "optimize-images": "imagemin themes/THEME_NAME/assets/img/* --out-dir=themes/THEME_NAME/assets/img"
+    "optimize:images": "imagemin themes/THEME_NAME/assets/img/* --out-dir=themes/THEME_NAME/assets/img"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.4",
