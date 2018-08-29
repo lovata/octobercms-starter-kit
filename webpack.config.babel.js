@@ -7,7 +7,6 @@ import CssoWebpackPlugin from 'csso-webpack-plugin';
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 
 const NODE_ENV = process.env.NODE_ENV || 'production';
-const WATCH = process.env.WATCH || false;
 
 const prefix = NODE_ENV === 'production' ? 'prod_' : 'dev_';
 
@@ -23,7 +22,6 @@ const config = {
     chunkFilename: 'js/[id].chunk.js',
     library: '[name]',
   },
-  watch: WATCH === 'watch',
   devtool: NODE_ENV === 'development' ? 'source-map' : false,
   resolve: {
     modules: ['node_modules'],
@@ -99,6 +97,16 @@ const config = {
           },
         },
       ],
+    },
+    {
+      test: /\.(png|jpe?g|svg)$/,
+      use: [{
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: '/img',
+        },
+      }],
     },
     ],
   },

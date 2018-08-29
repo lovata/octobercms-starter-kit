@@ -1,9 +1,10 @@
 {
   "scripts": {
-    "build:watch": "NODE_ENV=development WATCH=watch webpack",
+    "build:watch": "NODE_ENV=development webpack --watch",
     "build:dev": "NODE_ENV=development webpack",
-    "build:prod": "webpack",
-    "build:clean": "./node_modules/.bin/rimraf ./themes/THEME_NAME/assets/css && ./node_modules/.bin/rimraf ./themes/THEME_NAME/assets/js"
+    "build:prod": "webpack && npm run optimize:images",
+    "build:clean": "./node_modules/.bin/rimraf ./themes/THEME_NAME/assets/css && ./node_modules/.bin/rimraf ./themes/THEME_NAME/assets/js",
+    "optimize:images": "imagemin themes/THEME_NAME/assets/img/* --out-dir=themes/THEME_NAME/assets/img"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.4",
@@ -13,17 +14,20 @@
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.8",
     "csso-webpack-plugin": "^1.0.0-beta.10",
-    "eslint-config-standard": "^11.0.0-beta.0",
     "eslint": "^4.19.1",
-    "eslint-loader": "^2.1.0",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-loader": "^2.1.0",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.9.1",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.9.1",
     "eslint-plugin-standard": "^3.0.1",
+    "file-loader": "^2.0.0",
+    "imagemin-cli": "^3.0.0",
     "mini-css-extract-plugin": "^0.4.2",
+    "pngquant-bin": "^3.1.1",
     "postcss-css-variables": "^0.8.0",
     "postcss-loader": "^2.0.10",
     "postcss-nested": "^3.0.0",
@@ -34,7 +38,7 @@
     "style-loader": "^0.19.1",
     "stylelint": "^9.2.1",
     "stylelint-config-standard": "^18.0.0",
-    "stylelint-webpack-plugin": "^0.9.0",
+    "stylelint-webpack-plugin": "^0.10.5",
     "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0"
