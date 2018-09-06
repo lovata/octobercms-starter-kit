@@ -17,7 +17,7 @@ const config = {
   },
   output: {
     path: path.resolve('themes/THEME_NAME/assets'),
-    publicPath: '/assets/',
+    publicPath: '/themes/THEME_NAME/assets/',
     filename: 'js/[name].js',
     chunkFilename: 'js/[id].chunk.js',
     library: '[name]',
