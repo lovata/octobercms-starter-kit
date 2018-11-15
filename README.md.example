@@ -26,7 +26,7 @@ To start new October CMS project follow these steps:
 
 1. Clone Starter kit repository using `git clone git@github.com:lovata/octobercms-starter-kit.git` or `https://github.com/lovata/octobercms-starter-kit.git`.
 
-2. Setup you project in `bash/install/config.cfg` by specifying project settings:
+2. Setup you project in `bash/project/config.cfg` by specifying project settings:
 ```
 PROJECT_NAME=mydomain.com       # domain name
 PROJECTS_DIR=$HOME/myprojects   # directory
@@ -39,7 +39,7 @@ DB_COLLATION=utf8_general_ci    # collation
 OCTOBER_GIT_INSTALL=            # set 'true' if you want to install October via Git
 ```
 
-3. Run from terminal without root privileges `bash bash/install/install.sh` from project directory. Enter your sudo password when terminal asks for it.
+3. Run from terminal without root privileges `bash bash/project/install.sh` from project directory. Enter your sudo password when terminal asks for it.
 
 4. Wait until install process is finished.
 

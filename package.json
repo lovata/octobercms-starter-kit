@@ -29,6 +29,7 @@
     "imagemin-cli": "^3.0.0",
     "mini-css-extract-plugin": "^0.4.2",
     "pngquant-bin": "^3.1.1",
+    "postcss-color-alpha": "^2.0.0",
     "postcss-css-variables": "^0.8.0",
     "postcss-loader": "^2.0.10",
     "postcss-nested": "^3.0.0",

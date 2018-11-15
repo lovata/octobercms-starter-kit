@@ -43,7 +43,7 @@ rules:
   function-url-scheme-blacklist:
     - ftp
     - /^http/
-    - /^data/
+    # - /^data/
   # DISABLED: function-url-scheme-whitelist
   # DISABLED: function-whitelist
   ## Stylistic issues
@@ -152,7 +152,7 @@ rules:
       - /0/
     src:
       - /.eot/
-      - /.ttf/
+      # TODO convert to woff: - /.ttf/
       - /.otf/
       - /.svg/
   # DISABLED: declaration-property-value-whitelist
@@ -238,14 +238,14 @@ rules:
   ## Stylistic issues
   selector-list-comma-newline-after: always
   selector-list-comma-newline-before: never-multi-line
-  selector-list-comma-space-after: always-single-line
+  selector-list-comma-space-after: never-single-line
   selector-list-comma-space-before: never
 
   # Rule
   ## Stylistic issues
   rule-empty-line-before:
     - always
-    - except: inside-block
+    - except: first-nested
 
   # Media feature
   ## Possible errors
@@ -283,7 +283,7 @@ rules:
   ## Stylistic issues
   at-rule-empty-line-before:
     - always
-    - except: after-same-name
+    - except: blockless-after-blockless
   at-rule-name-case: lower
   # DISABLED: at-rule-name-newline-after
   at-rule-name-space-after: always
@@ -318,6 +318,6 @@ rules:
   ## Stylistic issues
   indentation: 2
   max-empty-lines: 1
-  max-line-length: 100
+  max-line-length: 150
   no-eol-whitespace: true
   no-missing-end-of-source-newline: true
