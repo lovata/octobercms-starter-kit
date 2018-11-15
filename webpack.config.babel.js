@@ -5,6 +5,7 @@ import CleanWebpackPlugin from 'clean-webpack-plugin';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
 import CssoWebpackPlugin from 'csso-webpack-plugin';
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
+import WebpackBuildNotifierPlugin from 'webpack-build-notifier';
 
 const NODE_ENV = process.env.NODE_ENV || 'production';
 
@@ -29,6 +30,10 @@ const config = {
   },
   context: path.resolve(),
   plugins: [
+    new WebpackBuildNotifierPlugin({
+        title: `THEME_NAME:${NODE_ENV} built`,
+        suppressSuccess: true,
+    }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new MiniCssExtractPlugin({
