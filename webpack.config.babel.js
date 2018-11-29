@@ -13,7 +13,7 @@ const prefix = NODE_ENV === 'production' ? 'prod_' : 'dev_';
 const config = {
   mode: NODE_ENV,
   entry: {
-    [`${prefix}main`]: path.resolve('themes/THEME_NAME/common.js'),
+    [`${prefix}common`]: path.resolve('themes/THEME_NAME/common.js'),
   },
   output: {
     path: path.resolve('themes/THEME_NAME/assets'),
