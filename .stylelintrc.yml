@@ -58,6 +58,10 @@ rules:
   function-url-quotes: always
   function-whitespace-after: always
 
+  # Keyframes
+  ## Limit language features
+  # DISABLED: keyframe-name-pattern
+
   # Number
   ## Limit language features
   number-max-precision: 4
@@ -127,8 +131,8 @@ rules:
     - columns
     - flex
     - font
-  # DISABLED: property-whitelist
   property-no-vendor-prefix: true
+  # DISABLED: property-whitelist
   # Stylistic issues
   property-case: lower
 
@@ -265,6 +269,7 @@ rules:
   ## Limit language features
   # DISABLED: media-feature-name-blacklist
   media-feature-name-no-vendor-prefix: true
+  # DISABLED: media-feature-name-value-whitelist
   # DISABLED: media-feature-name-whitelist
   ## Stylistic issues
   media-feature-colon-space-after: always
@@ -301,6 +306,7 @@ rules:
   at-rule-name-space-after: always
   # DISABLED: at-rule-semicolon-newline-after
   at-rule-semicolon-space-before: never
+
   # Comment
   ## Possible errors
   comment-no-empty: true
@@ -329,7 +335,9 @@ rules:
   no-unknown-animations: true
   ## Stylistic issues
   indentation: 2
+  #DISABLE: linebreaks
   max-empty-lines: 1
   max-line-length: 100
   no-eol-whitespace: true
   no-missing-end-of-source-newline: true
+  no-empty-first-line: true
