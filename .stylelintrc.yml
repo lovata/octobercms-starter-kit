@@ -31,7 +31,7 @@ rules:
 
   # Font weight
   ## Stylistic issues
-  font-weight-notation: named-where-possible
+  font-weight-notation: numeric
 
   # Function
   ## Possible errors
@@ -57,6 +57,10 @@ rules:
   function-parentheses-space-inside: never
   function-url-quotes: always
   function-whitespace-after: always
+
+  # Keyframes
+  ## Limit language features
+  # DISABLED: keyframe-name-pattern
 
   # Number
   ## Limit language features
@@ -127,8 +131,8 @@ rules:
     - columns
     - flex
     - font
-  # DISABLED: property-whitelist
   property-no-vendor-prefix: true
+  # DISABLED: property-whitelist
   # Stylistic issues
   property-case: lower
 
@@ -155,7 +159,19 @@ rules:
       - /.ttf/
       - /.otf/
       - /.svg/
-  # DISABLED: declaration-property-value-whitelist
+  declaration-property-value-whitelist:
+    -
+      /color/:
+        - /^var\(--color-/
+      /^fill/:
+        - /^var\(--color-/
+      /^stroke/:
+        - /^var\(--color-/
+      /font-family/:
+        - /^var\(--font-family-/
+      /font-size/:
+        - /^var\(--font-size-/
+    - message: "It's allowed to use only \"var(--var)\" for different color (--color-NAME) and font (--font-family-NAME, --font-size-NAME) props"
   ## Stylistic issues
   declaration-bang-space-after: never
   declaration-bang-space-before: always
@@ -253,6 +269,7 @@ rules:
   ## Limit language features
   # DISABLED: media-feature-name-blacklist
   media-feature-name-no-vendor-prefix: true
+  # DISABLED: media-feature-name-value-whitelist
   # DISABLED: media-feature-name-whitelist
   ## Stylistic issues
   media-feature-colon-space-after: always
@@ -289,6 +306,7 @@ rules:
   at-rule-name-space-after: always
   # DISABLED: at-rule-semicolon-newline-after
   at-rule-semicolon-space-before: never
+
   # Comment
   ## Possible errors
   comment-no-empty: true
@@ -317,7 +335,9 @@ rules:
   no-unknown-animations: true
   ## Stylistic issues
   indentation: 2
+  #DISABLE: linebreaks
   max-empty-lines: 1
   max-line-length: 100
   no-eol-whitespace: true
   no-missing-end-of-source-newline: true
+  no-empty-first-line: true
