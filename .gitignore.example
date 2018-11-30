@@ -135,6 +135,12 @@ GitHub.sublime-settings
 !.vscode/extensions.json
 
 # ------------------------------
+# Visual Studio Code Histoty Plugin
+# ------------------------------
+
+.history
+
+# ------------------------------
 # JetBrains
 # ------------------------------
 
