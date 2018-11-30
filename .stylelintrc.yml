@@ -155,7 +155,13 @@ rules:
       - /.ttf/
       - /.otf/
       - /.svg/
-  # DISABLED: declaration-property-value-whitelist
+  declaration-property-value-whitelist:
+    /color/:
+      - /^var\(--color-/
+    /font-family/:
+      - /^var\(--font-family-/
+    /font-size/:
+      - /^var\(--font-size-/
   ## Stylistic issues
   declaration-bang-space-after: never
   declaration-bang-space-before: always
