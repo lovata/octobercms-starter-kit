@@ -158,6 +158,10 @@ rules:
   declaration-property-value-whitelist:
     /color/:
       - /^var\(--color-/
+    /^fill/:
+      - /^var\(--color-/
+    /^stroke/:
+      - /^var\(--color-/
     /font-family/:
       - /^var\(--font-family-/
     /font-size/:
