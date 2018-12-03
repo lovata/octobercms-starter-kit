@@ -226,7 +226,7 @@ rules:
   selector-max-empty-lines: 0
   selector-max-id: 0
   selector-max-pseudo-class: 3
-  selector-max-specificity: 0,3,1
+  selector-max-specificity: 0,2,1
   selector-max-type: 0
   selector-max-universal: 1
   # DISABLED: selector-nested-pattern
@@ -254,14 +254,14 @@ rules:
   ## Stylistic issues
   selector-list-comma-newline-after: always
   selector-list-comma-newline-before: never-multi-line
-  selector-list-comma-space-after: always-single-line
+  selector-list-comma-space-after: never-single-line
   selector-list-comma-space-before: never
 
   # Rule
   ## Stylistic issues
   rule-empty-line-before:
     - always
-    - except: inside-block
+    - except: first-nested
 
   # Media feature
   ## Possible errors
@@ -300,7 +300,7 @@ rules:
   ## Stylistic issues
   at-rule-empty-line-before:
     - always
-    - except: after-same-name
+    - except: blockless-after-blockless
   at-rule-name-case: lower
   # DISABLED: at-rule-name-newline-after
   at-rule-name-space-after: always
