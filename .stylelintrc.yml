@@ -226,7 +226,7 @@ rules:
   selector-max-empty-lines: 0
   selector-max-id: 0
   selector-max-pseudo-class: 3
-  selector-max-specificity: 0,2,1
+  selector-max-specificity: 0,3,1
   selector-max-type: 0
   selector-max-universal: 1
   # DISABLED: selector-nested-pattern
