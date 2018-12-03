@@ -4,8 +4,14 @@
     "build:dev": "NODE_ENV=development webpack",
     "build:prod": "webpack && npm run optimize:images",
     "build:clean": "./node_modules/.bin/rimraf ./themes/THEME_NAME/assets/css && ./node_modules/.bin/rimraf ./themes/THEME_NAME/assets/js",
-    "optimize:images": "imagemin themes/THEME_NAME/assets/img/* --out-dir=themes/THEME_NAME/assets/img"
+    "optimize:images": "imagemin themes/THEME_NAME/assets/img/* --out-dir=themes/THEME_NAME/assets/img",
+    "lint:css": "./node_modules/.bin/stylelint ./themes/THEME_NAME/*.css ./themes/THEME_NAME/**/*.css",
+    "lint:js": "./node_modules/.bin/eslint ./themes/THEME_NAME/*.js ./themes/THEME_NAME/**/*.js"
   },
+  "pre-commit": [
+    "lint:css",
+    "lint:js"
+  ],
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
@@ -35,6 +41,7 @@
     "postcss-preset-env": "^5.3.0",
     "postcss-smart-import": "^0.7.6",
     "postcss-url": "^7.3.0",
+    "pre-commit": "^1.2.2",
     "rimraf": "^2.6.2",
     "style-ext-html-webpack-plugin": "^3.4.5",
     "style-loader": "^0.19.1",
