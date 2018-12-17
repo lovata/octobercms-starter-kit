@@ -1,8 +1,8 @@
 {
   "extends": "./.eslintrc.json",
   "rules": {
-    "no-unused-vars": 1,
-    "no-debugger": 1,
-    "no-console": 1
+    "no-unused-vars": "warn",
+    "no-debugger": "warn",
+    "no-console": "warn"
   }
 }

@@ -4,7 +4,7 @@
         "plugin:eslint-comments/recommended"
     ],
     "rules": {
-        "no-console": 2,
+        "no-console": "error",
         "eslint-comments/no-unused-disable": "error"
     }
 }
