@@ -9,6 +9,7 @@ import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 const NODE_ENV = process.env.NODE_ENV || 'production';
 
 const prefix = NODE_ENV === 'production' ? 'prod_' : 'dev_';
+const isLocal = process.env.LOCAL_DEV || false;
 
 const config = {
   mode: NODE_ENV,
@@ -66,6 +67,7 @@ const config = {
       loader: 'eslint-loader',
       options: {
         fix: true,
+        configFile: isLocal ? '.local-dev.eslintrc.json' : '.eslintrc.json',
       },
     },
     {

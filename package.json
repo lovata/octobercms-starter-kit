@@ -1,12 +1,12 @@
 {
   "scripts": {
-    "build:watch": "cross-env NODE_ENV=development ./node_modules/.bin/webpack --watch",
+    "build:watch": "cross-env NODE_ENV=development LOCAL_DEV=local ./node_modules/.bin/webpack --watch",
     "build:dev": "cross-env NODE_ENV=development ./node_modules/.bin/webpack",
     "build:prod": "./node_modules/.bin/webpack && npm run optimize:images",
     "build:clean": "./node_modules/.bin/rimraf ./themes/THEME_NAME/assets/css && ./node_modules/.bin/rimraf ./themes/THEME_NAME/assets/js",
     "optimize:images": "./node_modules/.bin/imagemin themes/THEME_NAME/assets/img/* --out-dir=themes/THEME_NAME/assets/img",
-    "lint:css": "./node_modules/.bin/stylelint ./themes/THEME_NAME/*.css ./themes/THEME_NAME/**/*.css",
-    "lint:js": "./node_modules/.bin/eslint ./themes/THEME_NAME/*.js ./themes/THEME_NAME/**/*.js"
+    "lint:css": "./node_modules/.bin/stylelint ./themes/THEME_NAME/*.css ./themes/THEME_NAME/**/*.css --fix",
+    "lint:js": "./node_modules/.bin/eslint ./themes/THEME_NAME/*.js ./themes/THEME_NAME/**/*.js --fix"
   },
   "pre-commit": [
     "lint:css",
@@ -26,6 +26,7 @@
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-loader": "^2.1.0",
+    "eslint-plugin-eslint-comments": "^3.0.1",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-node": "^5.2.1",
@@ -50,7 +51,9 @@
     "stylelint-config-standard": "^18.0.0",
     "stylelint-webpack-plugin": "^0.10.5",
     "uglifyjs-webpack-plugin": "^1.1.6",
-    "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0"
+  },
+  "dependencies": {
+    "webpack": "^4.17.1"
   }
 }
