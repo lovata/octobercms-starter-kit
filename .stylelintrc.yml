@@ -152,13 +152,19 @@ rules:
     /^animation/:
       - "ms"
   declaration-property-value-blacklist:
-    border:
-      - /0/
-    src:
-      - /.eot/
-      - /.ttf/
-      - /.otf/
-      - /.svg/
+    -
+      border:
+        - /0/
+      src:
+        - /.eot/
+        - /.ttf/
+        - /.otf/
+        - /.svg/
+      transition:
+        - /^all/
+      background-image:
+        - /linear-gradient/
+    - message: "It's not allowed to use a short border notation; any font except .woff and .woff2; 'transition: all' because of the Edge bug; and linear gradients without var(--grad)"
   declaration-property-value-whitelist:
     -
       /color/:
@@ -171,7 +177,15 @@ rules:
         - /^var\(--font-family-/
       /font-size/:
         - /^var\(--font-size-/
-    - message: "It's allowed to use only \"var(--var)\" for different color (--color-NAME) and font (--font-family-NAME, --font-size-NAME) props"
+      /line-height/:
+        - /^var\(--line-height-/
+      /border-radius/:
+        - /^var\(--border-radius-/
+      /box-shadow/:
+        - /^var\(--shadow-/
+      /text-shadow/:
+        - /^var\(--shadow-/
+    - message: "It's allowed to use only \"var(--var)\" for different color (--color-NAME); font (--font-family-NAME, --font-size-NAME); line height (--line-height-NAME); border radius (--border-radius-NAME); and shadows (--shadow-NAME) props"
   ## Stylistic issues
   declaration-bang-space-after: never
   declaration-bang-space-before: always
