@@ -152,13 +152,17 @@ rules:
     /^animation/:
       - "ms"
   declaration-property-value-blacklist:
-    border:
-      - /0/
-    src:
-      - /.eot/
-      - /.ttf/
-      - /.otf/
-      - /.svg/
+    -
+      border:
+        - /0/
+      src:
+        - /.eot/
+        - /.ttf/
+        - /.otf/
+        - /.svg/
+      transition:
+        - /^all/
+    - message: "It's not allowed to use a short border notation; any font except .woff and .woff2; and 'transition: all' because of the Edge bug"
   declaration-property-value-whitelist:
     -
       /color/:
