@@ -4,7 +4,7 @@ module.exports = {
       addDependencyTo: require('webpack')
     },
     'postcss-url': {
-      url: "rebase",
+      url: 'rebase',
     },
     'postcss-nested': {},
     'postcss-preset-env': {

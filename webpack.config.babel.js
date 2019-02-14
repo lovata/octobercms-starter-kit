@@ -67,7 +67,7 @@ const config = {
       loader: 'eslint-loader',
       options: {
         fix: true,
-        configFile: isLocal ? '.local-dev.eslintrc.json' : '.eslintrc.json',
+        configFile: isLocal ? '.local.eslintrc' : '.eslintrc',
       },
     },
     {

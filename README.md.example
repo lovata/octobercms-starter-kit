@@ -54,6 +54,8 @@ OCTOBER_GIT_INSTALL=            # set 'true' if you want to install October via 
 6. CSSO
 7. ESLint
 8. StyleLint
+9. LOVATA's configs for ESLint and StyleLint
+10. .editorconfig
 
 ## Usage
 
@@ -63,3 +65,7 @@ OCTOBER_GIT_INSTALL=            # set 'true' if you want to install October via 
 2. `npm tun build:dev` for development (sourcemaps)
 3. `npm run build:watch` for watching changes (development)
 4. `npm run build:clean` to clean assets (=dist) folder
+5. `npm run optimize:images` to optimize images
+6. `npm run lint:css` to lint CSS
+7. `npm run lint:js` to lint JS
+
