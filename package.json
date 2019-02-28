@@ -8,10 +8,13 @@
     "lint:css": "./node_modules/.bin/stylelint ./themes/THEME_NAME/*.css ./themes/THEME_NAME/**/*.css --fix",
     "lint:js": "./node_modules/.bin/eslint ./themes/THEME_NAME/*.js ./themes/THEME_NAME/**/*.js --fix"
   },
-  "pre-commit": [
-    "lint:css",
-    "lint:js"
-  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint:css && npm run lint:js",
+      "post-merge": "post-npm-install",
+      "post-rebase": "post-npm-install"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
@@ -26,16 +29,17 @@
     "eslint-config-lovata": "^1.7.0",
     "eslint-loader": "^2.1.0",
     "file-loader": "^2.0.0",
+    "husky": "^1.3.1",
     "imagemin-cli": "^3.0.0",
     "mini-css-extract-plugin": "^0.4.2",
     "pngquant-bin": "^3.1.1",
+    "post-npm-install": "^1.0.0",
     "postcss-css-variables": "^0.8.0",
     "postcss-loader": "^2.0.10",
     "postcss-nested": "^3.0.0",
     "postcss-preset-env": "^5.3.0",
     "postcss-smart-import": "^0.7.6",
     "postcss-url": "^7.3.0",
-    "pre-commit": "^1.2.2",
     "rimraf": "^2.6.3",
     "style-ext-html-webpack-plugin": "^3.4.5",
     "style-loader": "^0.19.1",
