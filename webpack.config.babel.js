@@ -5,6 +5,7 @@ import CleanWebpackPlugin from 'clean-webpack-plugin';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
 import CssoWebpackPlugin from 'csso-webpack-plugin';
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const NODE_ENV = process.env.NODE_ENV || 'production';
 
@@ -58,6 +59,7 @@ const config = {
       files: ['themes/THEME_NAME/*.css', 'themes/THEME_NAME/styles/**/*.css'],
       failOnError: true,
     }),
+    new BundleAnalyzerPlugin(),
   ],
   module: {
     rules: [{
