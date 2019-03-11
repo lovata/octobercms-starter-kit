@@ -46,7 +46,8 @@
     "stylelint": "9.9.0",
     "stylelint-webpack-plugin": "^0.10.5",
     "uglifyjs-webpack-plugin": "^1.1.6",
-    "webpack-cli": "^3.2.1"
+    "webpack-cli": "^3.2.1",
+    "webpack-bundle-analyzer": "^3.0.4"
   },
   "dependencies": {
     "webpack": "^4.29.0"
